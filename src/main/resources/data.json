@@ -1,0 +1,26 @@
+[
+  {
+    "colour": "red",
+    "amount": 1
+  },
+  {
+    "colour": "yellow",
+    "amount": 5
+  },
+  {
+    "colour": "black",
+    "amount": 2
+  },
+  {
+    "colour": "red",
+    "amount": 9
+  },
+  {
+    "colour": "yellow",
+    "amount": 5
+  },
+  {
+    "colour": "black",
+    "amount": 8
+  }
+]
