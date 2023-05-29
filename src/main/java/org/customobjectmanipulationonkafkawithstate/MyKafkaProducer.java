@@ -1,4 +1,4 @@
-package org.custonobjectmanipulationwithkafka;
+package org.customobjectmanipulationonkafkawithstate;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -9,8 +9,8 @@ import org.apache.kafka.common.serialization.IntegerSerializer;
 import java.util.List;
 import java.util.Properties;
 
-import static org.custonobjectmanipulationwithkafka.KafkaConfig.BOOTSTRAP_SERVER;
-import static org.custonobjectmanipulationwithkafka.KafkaConfig.PRODUCT_IN_TOPIC;
+import static org.customobjectmanipulationwithkafka.KafkaConfig.BOOTSTRAP_SERVER;
+import static org.customobjectmanipulationwithkafka.KafkaConfig.PRODUCT_IN_TOPIC;
 
 public class MyKafkaProducer {
 

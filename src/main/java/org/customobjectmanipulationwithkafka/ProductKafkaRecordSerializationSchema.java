@@ -1,4 +1,4 @@
-package org.custonobjectmanipulationwithkafka;
+package org.customobjectmanipulationwithkafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package org.custonobjectmanipulationwithkafka;
+package org.customobjectmanipulationonkafkawithstate;
 
 public class KafkaConfig {
 

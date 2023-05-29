@@ -1,26 +1,26 @@
 [
   {
-    "colour": "red",
+    "name": "apple",
     "amount": 1
   },
   {
-    "colour": "yellow",
+    "name": "banana",
     "amount": 5
   },
   {
-    "colour": "black",
+    "name": "raspberry",
     "amount": 2
   },
   {
-    "colour": "red",
+    "name": "apple",
     "amount": 9
   },
   {
-    "colour": "yellow",
+    "name": "banana",
     "amount": 5
   },
   {
-    "colour": "black",
+    "name": "raspberry",
     "amount": 8
   }
 ]
