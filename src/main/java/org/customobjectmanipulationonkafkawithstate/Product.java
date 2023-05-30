@@ -30,6 +30,10 @@ public class Product {
     this.amount = amount;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   @Override
   public String toString() {
     return "Product{" +

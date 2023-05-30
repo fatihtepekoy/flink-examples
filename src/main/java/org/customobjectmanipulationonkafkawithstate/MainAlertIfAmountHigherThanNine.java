@@ -1,40 +1,36 @@
 package org.customobjectmanipulationonkafkawithstate;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.connector.base.DeliveryGuarantee;
 import org.apache.flink.connector.kafka.sink.KafkaSink;
 import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-public class Main {
+public class MainAlertIfAmountHigherThanNine {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.getExecutionEnvironment();
         // prepare test data and write the input topic
         PublishInitialTestData.publish();
-
         // read the input topic
         KafkaSource<Product> kafkaSource = getProductKafkaSource();
 
         // Add the Kafka source to the Flink application
         DataStreamSource<Product> dataStreamSource = getProductDataStreamSource(env, kafkaSource);
 
-        // Distribute the data based on the product(Product class hashCode is overwritten)
-        KeyedStream<Product, Product> productObjectKeyedStream = getProductObjectKeyedStream(dataStreamSource);
+        // group the stream by product name
+        DataStream<Tuple2<String, Integer>> resultStream = dataStreamSource
+                .keyBy(Product::getName)
+                .process(new ProductAmountAggregatorAndAlert());
 
-        // Apply ProductAmountSumStatefulOperation
-        SingleOutputStreamOperator<Product> sumOfProductAmountsStream = getOutputStreamOperator(productObjectKeyedStream);
-
-        // Prepare sink
-        KafkaSink<Product> sink = getProductKafkaSink();
-
-        // Add the sink to the outStream
-        sumOfProductAmountsStream.sinkTo(sink);
+        resultStream.print();
 
         // Execute the Flink job
         env.execute("Product sum of amount example");
