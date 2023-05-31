@@ -5,6 +5,7 @@ import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
+import org.sensor.SensorReading;
 
 public class HighTemperatureProcessor extends KeyedProcessFunction<String, SensorReading, String> {
 
@@ -30,14 +31,14 @@ public class HighTemperatureProcessor extends KeyedProcessFunction<String, Senso
             currentCount = 0;
         }
 
-        if (value.temperature > threshold) {
+        if (value.getTemperature() > threshold) {
             currentCount++;
         } else {
             currentCount = 0;
         }
 
         if (currentCount >= maxHighTempCount) {
-            out.collect("Sensor " + value.sensorId + " has recorded " + maxHighTempCount + " consecutive temperatures above " + threshold + ".");
+            out.collect("Sensor " + value.getSensorId() + " has recorded " + maxHighTempCount + " consecutive temperatures above " + threshold + ".");
             currentCount = 0;
         }
 

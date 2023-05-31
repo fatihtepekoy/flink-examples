@@ -1,16 +1,20 @@
-package org.avgsensorvalueinwindowwithstate;
+package org.sensor;
 
 public class SensorReading {
-    public String sensorId;
-    public float temperature;
-    public long timestamp;
+    private String sensorId;
+    private float temperature;
+    private long timestamp;
 
     public SensorReading(String sensorId, float temperature, long timestamp) {
         this.sensorId = sensorId;
         this.temperature = temperature;
         this.timestamp = timestamp;
-        System.out.println(toString());
+        System.out.println(this);
     }
+
+    public SensorReading() {
+    }
+
 
     public String getSensorId() {
         return sensorId;

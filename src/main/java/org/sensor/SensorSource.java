@@ -1,4 +1,4 @@
-package org.sensormaxtemperature;
+package org.sensor;
 
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
@@ -7,7 +7,7 @@ import java.util.Random;
 public class SensorSource implements SourceFunction<SensorReading> {
 
     private volatile boolean running = true;
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     @Override
     public void run(SourceContext<SensorReading> ctx) throws Exception {
@@ -15,7 +15,8 @@ public class SensorSource implements SourceFunction<SensorReading> {
         while (running) {
             String sensor = sensors[rand.nextInt(sensors.length)];
             float temperature = rand.nextFloat() * 100;
-            ctx.collect(new SensorReading(sensor, temperature));
+            long timestamp = System.currentTimeMillis();
+            ctx.collect(new SensorReading(sensor, temperature, timestamp));
             Thread.sleep(1000);
         }
     }

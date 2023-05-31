@@ -6,6 +6,7 @@ import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
+import org.sensor.SensorReading;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +32,7 @@ public class AverageTempFunctionBasedOnEventTimestamp extends KeyedProcessFuncti
         }
 
         // Update the state with the new value
-        double newSum = currentSumCount.getSum() + value.temperature;
+        double newSum = currentSumCount.getSum() + value.getTemperature();
         int newCount = currentSumCount.getCount() + 1;
         SumCount newSumCount = new SumCount(newSum, newCount);
 
